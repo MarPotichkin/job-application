@@ -24,6 +24,7 @@ export function useApplyToJob({
         candidateId: candidate.candidateId,
         jobId,
         repoUrl,
+        applicationId: candidate.applicationId,
       });
     },
     onSuccess: () => {

@@ -12,4 +12,5 @@ export interface ApplyToJobDTO {
   jobId: string;
   candidateId: string;
   repoUrl: string;
+  applicationId: string;
 }
