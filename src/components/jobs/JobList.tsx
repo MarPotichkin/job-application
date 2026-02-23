@@ -17,7 +17,8 @@ export function JobList({ jobsQuery, candidate }: Props) {
     return (
         <section className="w-full space-y-10 py-8 animate-in fade-in duration-700">
             <header className="relative inline-block">
-                <Typography variant="h1" className="mb-2">Open Positions</Typography>
+                <Typography variant="h1">Open Positions</Typography>
+                <Typography variant="h2" className="mb-3">Find your place at Nimble Gravity</Typography>
             </header>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
