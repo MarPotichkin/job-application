@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { JobList } from "./components/jobs/JobList";
 import { Layout } from "./components/layout/Layout";
 import { useCandidateByEmail } from "./hooks/useCandidate";
 import { useJobs } from "./hooks/useJobs"
 import { isValidEmail } from "./utils/isValidEmail";
+import { Splash } from "./components/layout/Splash";
 
 function App() {
   const [emailInput, setEmailInput] = useState("")
   const [submittedEmail, setSubmittedEmail] = useState<string | null>(null)
   const [emailError, setEmailError] = useState<string | undefined>()
+  const [isAppLoading, setIsAppLoading] = useState(true)
 
   const candidateQuery = useCandidateByEmail(submittedEmail ?? "")
   const jobsQuery = useJobs();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAppLoading(false)
+    }, 2500)
+    return () => clearTimeout(timer)
+  }, [])
 
   function handleSubmitEmail() {
     if (!isValidEmail(emailInput)) {
@@ -42,9 +51,12 @@ function App() {
 
   return (
     <>
-      <Layout headerProps={headerProps}>
-        <JobList jobsQuery={jobsQuery} candidate={candidateQuery.data} />
-      </Layout>
+      {isAppLoading && <Splash />}
+      <div className={isAppLoading ? "hidden" : "block animate-in fade-in duration-700"}>
+        <Layout headerProps={headerProps}>
+          <JobList jobsQuery={jobsQuery} candidate={candidateQuery.data} />
+        </Layout>
+      </div>
     </>
   )
 }

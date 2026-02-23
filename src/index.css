@@ -35,3 +35,20 @@
     font-style: normal;
     font-display: swap;
 }
+
+@layer utilities {
+    @keyframes logo-exit {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .animate-logo-exit {
+        animation: logo-exit 0.8s ease-in-out forwards;
+        animation-delay: 1.5s;
+    }
+}
