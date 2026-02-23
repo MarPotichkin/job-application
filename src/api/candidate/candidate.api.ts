@@ -10,7 +10,7 @@ export async function getCandidateByEmail(email: string): Promise<Candidate> {
   return mapCandidate(dto);
 }
 
-export async function ApplyToJob(data: ApplyToJobDTO): Promise<void> {
+export async function applyToJob(data: ApplyToJobDTO): Promise<void> {
   await apiFetch(`/api/candidate/apply-to-job`, {
     method: "POST",
     body: JSON.stringify(data),
