@@ -1,33 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { JobList } from "./components/jobs/JobList";
+import { Layout } from "./components/layout/Layout";
+import { useCandidateByEmail } from "./hooks/useCandidate";
+import { useJobs } from "./hooks/useJobs"
+import { isValidEmail } from "./utils/isValidEmail";
+import { Splash } from "./components/layout/Splash";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [emailInput, setEmailInput] = useState("")
+  const [submittedEmail, setSubmittedEmail] = useState<string | null>(null)
+  const [emailError, setEmailError] = useState<string | undefined>()
+  const [isAppLoading, setIsAppLoading] = useState(true)
+
+  const candidateQuery = useCandidateByEmail(submittedEmail ?? "")
+  const jobsQuery = useJobs();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAppLoading(false)
+    }, 2500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  function handleSubmitEmail() {
+    if (!isValidEmail(emailInput)) {
+      setEmailError("Please enter a valid email address")
+      return
+    }
+    setEmailError(undefined)
+    setSubmittedEmail(emailInput.trim())
+  }
+
+  function handleClearCandidate() {
+    setSubmittedEmail(null)
+    setEmailInput("")
+    setEmailError(undefined)
+  }
+
+  const headerProps = {
+    emailInput,
+    setEmailInput: (val: string) => {
+      setEmailInput(val);
+      if (emailError) setEmailError(undefined)
+    },
+    onSubmit: handleSubmitEmail,
+    onClear: handleClearCandidate,
+    candidateQuery,
+    emailError
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      {isAppLoading && <Splash />}
+      <div className={isAppLoading ? "hidden" : "block animate-in fade-in duration-700"}>
+        <Layout headerProps={headerProps}>
+          <JobList jobsQuery={jobsQuery} candidate={candidateQuery.data} />
+        </Layout>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
