@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@theme {
+    --font-tiempos: "TiemposHeadline", serif;
+    --font-trebuchet: "Trebuchet MS", sans-serif;
+
+    /* Violet */
+    --color-primary: #121063;
+    --color-primary-dark: #210f36;
+    --color-primary-light: #6331a2;
+
+    /* Yellow */
+    --color-secondary: #e8a317;
+    --color-secondary-light: #efc230;
+
+    /* Gray */
+    --color-gray-border: #d2d2d2;
+    --color-gray-light: #f7f7f7;
+    --color-gray-text-dark: #364153;
+    --color-gray-text-light: #857b91;
+
+    /* Green */
+    --color-green-dark: #2f6b66;
+    --color-green-light: #4f817d;
+
+    --color-background-layout: #e7e2e8;
+    --color-background-navbar: #f7f7f7;
+    --color-background-primary: #2e1a47;
+}
+
+@font-face {
+    font-family: "TiemposHeadline";
+    src: url('./assets/fonts/test-tiempos-headline-bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
