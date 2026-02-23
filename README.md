@@ -35,6 +35,21 @@ Beyond fulfilling the functional requirements, the focus of this implementation 
 
 ---
 
+## Git Strategy
+
+This project was developed using a feature-branch workflow.
+
+Each significant change (API integration, domain modeling, UI iteration, etc.) was implemented in isolated branches before being merged into `main`.
+
+Branches were intentionally preserved to:
+- Make the development process transparent
+- Show incremental architectural decisions
+- Demonstrate iterative problem-solving
+
+The goal was to simulate a real collaborative workflow rather than a single-commit challenge delivery.
+
+---
+
 ## Architectural Approach
 The application follows a layered structure:
 
