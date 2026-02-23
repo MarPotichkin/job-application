@@ -39,7 +39,12 @@ Beyond fulfilling the functional requirements, the focus of this implementation 
 
 This project was developed using a feature-branch workflow.
 
-Each significant change (API integration, domain modeling, UI iteration, etc.) was implemented in isolated branches before being merged into `main`.
+Each significant change (API integration, domain modeling, UI iteration, etc.) was implemented in isolated branches before being merged into `dev`.
+
+- `main` → Production-ready code (deployed version)
+- `dev` → Integration branch for ongoing development
+- `feature/*` → Isolated feature development
+- `fix/*` → Bug fixes and small corrections
 
 Branches were intentionally preserved to:
 - Make the development process transparent
